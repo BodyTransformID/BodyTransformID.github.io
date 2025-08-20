@@ -1,254 +1,370 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transformasi Body - Program Diet 21 Hari</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #FF6B6B;
-            --secondary-color: #FF8E8E;
-            --accent-color: #4ECDC4;
-            --dark-color: #2D3436;
-        }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MSC Body Transformation — Program Diet 21 Hari</title>
+  <meta name="theme-color" content="#111827" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{
+      --primary:#FF6B6B;      /* brand coral */
+      --secondary:#FF8E8E;    /* lighter coral */
+      --accent:#4ECDC4;       /* mint */
+      --ink:#0f172a;          /* slate-900 */
+      --muted:#6b7280;        /* gray-500 */
+      --card:#ffffff;         /* white */
+      --bg:#f8fafc;           /* slate-50 */
+      --shadow:0 12px 30px rgba(15,23,42,.12);
+      --radius:18px;
+    }
 
-        .navbar {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-        }
+    html,body{scroll-behavior:smooth}
+    body{font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial; background:var(--bg); color:var(--ink)}
 
-        .hero-section {
-            height: 100vh;
-            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.8)), 
-                        url('https://source.unsplash.com/random/1920x1080/?fitness') center/cover;
-            display: flex;
-            align-items: center;
-        }
+    /* Navbar */
+    .navbar{transition:background .25s ease, box-shadow .25s ease}
+    .navbar-brand{font-weight:700; letter-spacing:.2px}
+    .navbar.scrolled{background:linear-gradient(135deg,var(--primary),var(--secondary)); box-shadow:var(--shadow)}
+    .nav-link{font-weight:500}
+    .nav-link:hover{opacity:.9}
 
-        .gradient-text {
-            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
+    /* Hero */
+    .hero{
+      position:relative;
+      min-height:100vh;
+      display:flex; align-items:center;
+      background:
+        radial-gradient(1200px 600px at 10% -5%, rgba(78,205,196,.25), transparent 60%),
+        radial-gradient(1000px 600px at 100% 0%, rgba(255,107,107,.18), transparent 55%),
+        linear-gradient(180deg, #fff, #fdfbfb);
+      overflow:hidden;
+    }
+    .hero::after{ /* decorative blob */
+      content:""; position:absolute; inset:auto -100px -200px -100px; height:420px;
+      background:radial-gradient(closest-side, rgba(255,142,142,.25), transparent 70%);
+      filter:blur(40px); pointer-events:none;
+    }
+    .text-gradient{background:linear-gradient(45deg,var(--primary),var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent}
+    .btn-brand{background:linear-gradient(135deg,var(--primary),var(--secondary)); border:none}
+    .btn-brand:hover{filter:brightness(.96)}
 
-        .program-card {
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: none;
-            border-radius: 15px;
-        }
+    /* Cards / sections */
+    .section{scroll-margin-top:84px}
+    .cardx{background:var(--card); border:none; border-radius:var(--radius); box-shadow:var(--shadow)}
+    .icon-bullet{width:38px;height:38px;border-radius:12px; display:inline-flex;align-items:center;justify-content:center; background:rgba(78,205,196,.14); color:#0b8079}
 
-        .program-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
+    /* Carousel — keep images contained, not stretched */
+    .carousel-frame{background:linear-gradient(180deg,#fff,#f5f7fb); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden}
+    .carousel-item{padding:10px}
+    .carousel-item .fit{width:100%; height:480px; object-fit:contain; object-position:center; background:#fff}
+    @media (max-width: 768px){.carousel-item .fit{height:300px}}
 
-        .carousel-item img {
-            height: 500px;
-            object-fit: scale-down;
-        }
+    /* Coach */
+    .coach-photo{aspect-ratio:1/1; width:100%; height:auto; object-fit:cover; border-radius:16px}
 
-        .coach-card {
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
+    /* WhatsApp Float */
+    .whatsapp-float{position:fixed; width:56px; height:56px; right:18px; bottom:18px; background:#25D366; color:#fff; display:flex; align-items:center; justify-content:center; border-radius:50%; box-shadow:0 12px 22px rgba(0,0,0,.18); z-index:1050}
+    .whatsapp-float:hover{color:#fff; filter:brightness(.95)}
 
-        .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 40px;
-            right: 40px;
-            background-color: #25d366;
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 3px #999;
-            z-index: 100;
-        }
+    /* Mobile bottom sticky CTA */
+    .mobile-cta{position:fixed; left:0; right:0; bottom:0; z-index:1040; background:#fff; box-shadow:0 -8px 24px rgba(15,23,42,.12)}
+    @media (min-width:768px){.mobile-cta{display:none}}
 
-        @media (max-width: 768px) {
-            .hero-section {
-                height: 70vh;
-            }
-            
-            .carousel-item img {
-                height: 300px;
-            }
-        }
-    </style>
+    /* Accessibility: reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      .navbar, .hero, .btn, .carousel{transition:none !important}
+    }
+  </style>
 </head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">BodyTransform</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#program">Program</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#success">Success Story</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#coach">Coach</a></li>
-                </ul>
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="90" tabindex="0">
+  <!-- Navbar -->
+  <nav id="mainNav" class="navbar navbar-expand-lg navbar-dark fixed-top py-2">
+    <div class="container">
+      <a class="navbar-brand" href="#home">MSC Body Transformation</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#program">Program</a></li>
+          <li class="nav-item"><a class="nav-link" href="#benefit">Manfaat</a></li>
+          <li class="nav-item"><a class="nav-link" href="#success">Testimoni</a></li>
+          <li class="nav-item"><a class="nav-link" href="#coach">Coach</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+          <li class="nav-item ms-lg-3"><a class="btn btn-sm btn-light px-3" target="_blank" href="https://wa.me/6285240919999?text=Halo%20Coach%2C%20saya%20mau%20konsultasi%20program%20MSC">Konsultasi Gratis</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="home" class="hero">
+    <div class="container py-5">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6 text-center text-lg-start">
+          <span class="badge rounded-pill text-bg-light px-3 py-2 mb-3">Program Terbukti • Komunitas Supportif</span>
+          <h1 class="display-4 fw-bold mb-3 text-gradient">Siap Transformasi Tubuh Dalam 21 Hari?</h1>
+          <p class="lead text-secondary mb-4">Turun 3–15 kg dengan meal plan, edukasi harian, dan pendampingan coach profesional. Sehat, aman, dan berkelanjutan.</p>
+          <div class="d-flex flex-column flex-sm-row gap-3">
+            <a href="#program" class="btn btn-brand btn-lg px-4 py-3"><i class="fa-solid fa-rocket me-2"></i>Mulai Sekarang</a>
+            <a target="_blank" href="https://wa.me/6285240919999?text=Halo%20Coach%2C%20saya%20tertarik%20Program%2021%20Hari" class="btn btn-outline-dark btn-lg px-4 py-3"><i class="fa-brands fa-whatsapp me-2"></i>Tanya Coach</a>
+          </div>
+          <div class="mt-4 small text-muted">Jadwal batch baru setiap minggu • Slot terbatas</div>
+        </div>
+        <div class="col-lg-6 d-none d-lg-block">
+          <div class="cardx p-2">
+            <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1920&auto=format&fit=crop" alt="Workout" class="w-100 rounded-4" loading="lazy" decoding="async" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Program / Pricing -->
+  <section id="program" class="section py-5">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold">Pilih Programmu</h2>
+        <p class="text-muted mb-0">Dua opsi yang fleksibel sesuai kebutuhan dan targetmu.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="cardx p-4 h-100">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h3 class="h4 mb-0">MSC Body Transformation (21 Hari)</h3>
+              <span class="badge text-bg-danger">Terpopuler</span>
             </div>
+            <ul class="list-unstyled mb-4">
+              <li class="mb-3"><span class="icon-bullet me-2"><i class="fa-solid fa-check"></i></span>Turun BB sehat & konsisten (3–15 kg*)</li>
+              <li class="mb-3"><span class="icon-bullet me-2"><i class="fa-solid fa-utensils"></i></span>Meal plan, resep, dan edukasi harian</li>
+              <li class="mb-3"><span class="icon-bullet me-2"><i class="fa-solid fa-people-group"></i></span>Support coach & komunitas 24/7</li>
+              <li class="mb-3"><span class="icon-bullet me-2"><i class="fa-solid fa-video"></i></span>Live class & rekaman materi</li>
+            </ul>
+            <a class="btn btn-brand w-100 py-3" target="_blank" href="https://wa.me/6285240919999?text=Halo%20Coach%2C%20saya%20mau%20daftar%20MSC%2021%20Hari"><i class="fa-brands fa-whatsapp me-2"></i>Daftar via WhatsApp</a>
+            <small class="text-muted d-block mt-2">*Hasil bervariasi tiap individu.</small>
+          </div>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container text-center">
-            <h1 class="display-3 fw-bold mb-4 gradient-text">SIAP TRANSFORMASI TUBUH?</h1>
-            <p class="lead mb-4">Turun 3-15 kg dalam 21 hari dengan bimbingan coach profesional</p>
-            <a href="#program" class="btn btn-lg btn-primary px-5 py-3">Mulai Sekarang</a>
+        <div class="col-md-6">
+          <div class="cardx p-4 h-100">
+            <h3 class="h4 mb-3">10 Hari Fit Challenge</h3>
+            <ul class="list-unstyled mb-4">
+              <li class="mb-3"><span class="icon-bullet me-2"><i class="fa-solid fa-bolt"></i></span>Kickstart: turun 1–5 kg</li>
+              <li class="mb-3"><span class="icon-bullet me-2"><i class="fa-solid fa-clipboard-check"></i></span>Panduan makan & tantangan harian</li>
+              <li class="mb-3"><span class="icon-bullet me-2"><i class="fa-solid fa-trophy"></i></span>Challenge seru + hadiah</li>
+            </ul>
+            <a class="btn btn-outline-dark w-100 py-3" target="_blank" href="https://wa.me/6285240919999?text=Halo%20Coach%2C%20saya%20mau%20ikut%2010%20Hari%20Fit%20Challenge">Tanya & Cek Slot</a>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Program Section -->
-    <section id="program" class="py-5">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="program-card bg-white p-4">
-                        <h3 class="text-primary">MSC Body Transformation (21 Hari)</h3>
-                        <ul class="list-unstyled">
-                            <li class="my-3"><i class="fas fa-check-circle text-success me-2"></i>Turun BB sehat & konsisten</li>
-                            <li class="my-3"><i class="fas fa-check-circle text-success me-2"></i>Meal plan & edukasi harian</li>
-                            <li class="my-3"><i class="fas fa-check-circle text-success me-2"></i>Support coach & komunitas</li>
-                        </ul>
-                        <a href="#coach" class="btn btn-primary w-100">Mau daftar? Hubungi Coach Sekarang!</a>
-                    </div>
+  <!-- Benefits -->
+  <section id="benefit" class="section py-5 bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold">Kenapa MSC?</h2>
+        <p class="text-muted mb-0">Metode yang mudah diikuti, didampingi, dan menyenangkan.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-6 col-lg-3">
+          <div class="cardx p-4 h-100 text-center">
+            <div class="icon-bullet mx-auto mb-3"><i class="fa-solid fa-leaf"></i></div>
+            <h6 class="fw-semibold">Sehat & Aman</h6>
+            <p class="small text-muted mb-0">Porsi makan terukur, fokus gizi seimbang.</p>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="cardx p-4 h-100 text-center">
+            <div class="icon-bullet mx-auto mb-3"><i class="fa-solid fa-chalkboard-user"></i></div>
+            <h6 class="fw-semibold">Pendampingan Coach</h6>
+            <p class="small text-muted mb-0">Dapatkan feedback & koreksi harian.</p>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="cardx p-4 h-100 text-center">
+            <div class="icon-bullet mx-auto mb-3"><i class="fa-solid fa-mug-hot"></i></div>
+            <h6 class="fw-semibold">Meal Plan Praktis</h6>
+            <p class="small text-muted mb-0">Resep sederhana, bahan mudah didapat.</p>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="cardx p-4 h-100 text-center">
+            <div class="icon-bullet mx-auto mb-3"><i class="fa-solid fa-heart-pulse"></i></div>
+            <h6 class="fw-semibold">Progress Terpantau</h6>
+            <p class="small text-muted mb-0">Tracking berat, ukuran, dan foto before-after.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Stories -->
+  <section id="success" class="section py-5">
+    <div class="container">
+      <div class="text-center mb-4">
+        <h2 class="fw-bold">Kisah Sukses Member</h2>
+      </div>
+      <div id="successCarousel" class="carousel slide carousel-dark carousel-frame" data-bs-ride="carousel" data-bs-interval="4000">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#successCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#successCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#successCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#successCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+          <button type="button" data-bs-target="#successCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+          <button type="button" data-bs-target="#successCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="fit" loading="lazy" decoding="async" src="Asset/testimoni/WhatsApp Image 2025-04-12 at 18.55.13 (1).jpeg" alt="Testimoni 1">
+          </div>
+          <div class="carousel-item">
+            <img class="fit" loading="lazy" decoding="async" src="Asset/testimoni/WhatsApp Image 2025-04-12 at 18.55.13.jpeg" alt="Testimoni 2">
+          </div>
+          <div class="carousel-item">
+            <img class="fit" loading="lazy" decoding="async" src="Asset/testimoni/WhatsApp Image 2025-04-12 at 18.56.08 (1).jpeg" alt="Testimoni 3">
+          </div>
+          <div class="carousel-item">
+            <img class="fit" loading="lazy" decoding="async" src="Asset/testimoni/WhatsApp Image 2025-04-12 at 18.56.08.jpeg" alt="Testimoni 4">
+          </div>
+          <div class="carousel-item">
+            <img class="fit" loading="lazy" decoding="async" src="Asset/testimoni/WhatsApp Image 2025-04-12 at 18.57.21 (1).jpeg" alt="Testimoni 5">
+          </div>
+          <div class="carousel-item">
+            <img class="fit" loading="lazy" decoding="async" src="Asset/testimoni/WhatsApp Image 2025-04-12 at 18.57.21.jpeg" alt="Testimoni 6">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#successCarousel" data-bs-slide="prev" aria-label="Sebelumnya">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#successCarousel" data-bs-slide="next" aria-label="Berikutnya">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coach -->
+  <section id="coach" class="section py-5 bg-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="cardx p-4">
+            <div class="row g-4 align-items-center">
+              <div class="col-md-5">
+                <img src="Asset/WhatsApp Image 2025-04-12 at 18.58.01.jpeg" alt="Coach Darmi" class="coach-photo w-100" loading="lazy" decoding="async">
+              </div>
+              <div class="col-md-7">
+                <h3 class="mb-1">Coach Darmi, M.Kes</h3>
+                <p class="text-muted mb-4">Fitness Coach</p>
+                <div class="d-grid gap-2 mb-3">
+                  <a target="_blank" href="https://wa.me/6285240919999?text=Halo%20Coach%20Darmi%2C%20saya%20mau%20konsultasi%20diet" class="btn btn-success btn-lg"><i class="fa-brands fa-whatsapp me-2"></i> 0852-4091-9999</a>
                 </div>
-                <div class="col-md-6">
-                    <div class="program-card bg-white p-4">
-                        <h3 class="text-primary">10 Hari Fit Challenge</h3>
-                        <ul class="list-unstyled">
-                            <li class="my-3"><i class="fas fa-check-circle text-success me-2"></i>Turun BB 1-5 kg</li>
-                            <li class="my-3"><i class="fas fa-check-circle text-success me-2"></i>Panduan makan & live class</li>
-                            <li class="my-3"><i class="fas fa-check-circle text-success me-2"></i>Challenge seru + hadiah</li>
-                        </ul>
-                        <a href="#coach" class="btn btn-primary w-100">Mau daftar? Hubungi Coach Sekarang!</a>
-                    </div>
+                <div class="d-flex gap-2">
+                  <a target="_blank" href="https://www.instagram.com/coachdarmi?igsh=a3o4a2k5M29iZHQz&utm_source=qr" class="btn btn-outline-dark"><i class="fab fa-instagram me-1"></i>Instagram</a>
+                  <a target="_blank" href="https://www.facebook.com/share/18tUD8H3vj/?mibextid=wwXIfr" class="btn btn-outline-dark"><i class="fab fa-facebook me-1"></i>Facebook</a>
+                  <a target="_blank" href="https://www.tiktok.com/@coachdarmi.tipsdiet?_t=ZS-8vTGpeLj2YS&_r=1" class="btn btn-outline-dark"><i class="fab fa-tiktok me-1"></i>TikTok</a>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Success Stories Carousel -->
-    <section id="success" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center mb-5">Kisah Sukses Member</h2>
-            <div id="successCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="Asset/testimoni/WhatsApp Image 2025-04-12 at 18.55.13 (1).jpeg" class="d-block w-100" alt="Success Story">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="Asset/testimoni/WhatsApp Image 2025-04-12 at 18.55.13.jpeg" class="d-block w-100" alt="Success Story">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="Asset/testimoni/WhatsApp Image 2025-04-12 at 18.56.08 (1).jpeg" class="d-block w-100" alt="Success Story">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="Asset/testimoni/WhatsApp Image 2025-04-12 at 18.56.08.jpeg" class="d-block w-100" alt="Success Story">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="Asset/testimoni/WhatsApp Image 2025-04-12 at 18.57.21 (1).jpeg" class="d-block w-100" alt="Success Story">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="Asset/testimoni/WhatsApp Image 2025-04-12 at 18.57.21.jpeg" class="d-block w-100" alt="Success Story">
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#successCarousel" data-bs-slide="prev">
-                    <span class="fas fa-chevron-left fs-2 text-dark"></span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#successCarousel" data-bs-slide="next">
-                    <span class="fas fa-chevron-right fs-2 text-dark"></span>
-                </button>
-                
-                </button>
+  <!-- FAQ -->
+  <section id="faq" class="section py-5">
+    <div class="container">
+      <div class="text-center mb-4">
+        <h2 class="fw-bold">Pertanyaan yang Sering Ditanya</h2>
+        <p class="text-muted mb-0">Masih ragu? Cek jawaban singkat ini.</p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="q1">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#a1">Berapa lama terlihat hasilnya?</button>
+              </h2>
+              <div id="a1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Mayoritas member mulai melihat perubahan pada 7–10 hari pertama. Hasil berbeda tiap orang, dipengaruhi pola makan & konsistensi.</div>
+              </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Coach Section -->
-    <section id="coach" class="py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="coach-card">
-                        <div class="row g-0">
-                            <div class="col-md-5">
-                                <img src="Asset/WhatsApp Image 2025-04-12 at 18.58.01.jpeg" class="img-fluid h-100" alt="Coach Darmi">
-                            </div>
-                            <div class="col-md-7 bg-white p-4">
-                                <h3>Coach Darmi, M.Kes</h3>
-                                <p class="text-muted">Fitness Coach</p>
-                                <div class="my-4">
-                                    <a href="https://wa.me/6285240919999" class="btn btn-success btn-lg w-100">
-                                        <i class="fab fa-whatsapp"></i> 0852-4091-9999
-                                    </a>
-                                </div>
-                                <div class="social-links">
-                                    <a href="https://www.instagram.com/coachdarmi?igsh=a3o4a2k5M29iZHQz&utm_source=qr" class="btn btn-outline-dark me-2"><i class="fab fa-instagram"></i></a>
-                                    <a href="https://www.facebook.com/share/18tUD8H3vj/?mibextid=wwXIfr" class="btn btn-outline-dark me-2"><i class="fab fa-facebook"></i></a>
-                                    <a href="https://www.tiktok.com/@coachdarmi.tipsdiet?_t=ZS-8vTGpeLj2YS&_r=1" class="btn btn-outline-dark"><i class="fab fa-tiktok"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="q2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2">Apakah harus olahraga?</button>
+              </h2>
+              <div id="a2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Tidak wajib, tapi direkomendasikan aktivitas fisik ringan 10–30 menit/hari untuk hasil optimal.</div>
+              </div>
             </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="q3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a3">Apakah aman untuk kondisi tertentu?</button>
+              </h2>
+              <div id="a3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Bila memiliki kondisi medis khusus, konsultasikan ke dokter terlebih dahulu. Program kami fokus pada kebiasaan makan lebih baik dan terukur.</div>
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-4">
-        <div class="container text-center">
-            <p>&copy; MSC Body Transformation. All rights reserved</p>
-            <!-- <p>Jl. Sehat Bahagia No. 123, Jakarta</p> -->
+  <!-- Footer -->
+  <footer class="py-4 text-center text-white" style="background:#111827">
+    <div class="container small">
+      <div class="mb-2">&copy; <span id="year"></span> MSC Body Transformation. All rights reserved.</div>
+      <!-- <div>Jl. Sehat Bahagia No. 123, Jakarta</div> -->
+    </div>
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a class="whatsapp-float" target="_blank" aria-label="Chat WhatsApp" href="https://wa.me/6285240919999?text=Halo%20Coach%2C%20saya%20ingin%20konsultasi%20program%20diet">
+    <i class="fab fa-whatsapp fa-lg"></i>
+  </a>
+
+  <!-- Mobile Sticky CTA -->
+  <div class="mobile-cta py-2 px-3">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <div class="fw-semibold">Siap mulai?</div>
+          <div class="small text-muted">Chat coach untuk cek slot hari ini.</div>
         </div>
-    </footer>
+        <a target="_blank" href="https://wa.me/6285240919999?text=Halo%20Coach%2C%20saya%20tertarik%20ikut%20MSC" class="btn btn-success"><i class="fa-brands fa-whatsapp me-1"></i> WhatsApp</a>
+      </div>
+    </div>
+  </div>
 
-    <!-- WhatsApp Float -->
-    <a href="https://wa.me/6285240919999" class="whatsapp-float">
-        <i class="fab fa-whatsapp my-2"></i>
-    </a>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Navbar background on scroll
+    const nav = document.getElementById('mainNav');
+    const updateNav = () => { nav.classList.toggle('scrolled', window.scrollY > 8); };
+    updateNav();
+    window.addEventListener('scroll', updateNav);
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Smooth scroll untuk navigasi
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Animasi scroll untuk program cards
-        window.addEventListener('scroll', function() {
-            const cards = document.querySelectorAll('.program-card');
-            cards.forEach(card => {
-                const cardPosition = card.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.3;
-                
-                if(cardPosition < screenPosition) {
-                    card.style.opacity = '1';
-                }
-            });
-        });
-    </script>
+    // Smooth scroll offset fix (for browsers not honoring scroll-margin)
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        if(id.length>1){
+          const el = document.querySelector(id);
+          if(el){ e.preventDefault(); window.scrollTo({top: el.offsetTop-80, behavior:'smooth'}); }
+        }
+      })
+    })
+  </script>
 </body>
 </html>
